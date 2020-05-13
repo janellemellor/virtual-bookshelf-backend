@@ -41,4 +41,12 @@ describe('book routes', () => {
       });
   });
 
+  it('gets all books', async() => {
+    return request(app)
+      .get('api/vi/books')
+      .then(res => {
+        expect(res.body).toEqual(books);
+      });
+  });
+
 });
