@@ -42,10 +42,26 @@ describe('book routes', () => {
   });
 
   it('gets all books', async() => {
+    await Book.create({
+        author: 'Nayyirah Waheed',
+        title: 'Salt',
+        genre: 'Poetry',
+        imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1380105266l/18585282.jpg',
+        synopsis: 'It was only and ever love'
+    });
+    
     return request(app)
-      .get('api/vi/books')
+      .get('/api/v1/books')
       .then(res => {
-        expect(res.body).toEqual(books);
+        expect(res.body).toEqual([{
+            _id: expect.any(String),
+            author: 'Nayyirah Waheed',
+            title: 'Salt',
+            genre: 'Poetry',
+            imageUrl: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1380105266l/18585282.jpg',
+            synopsis: 'It was only and ever love', 
+            __v: 0
+        }]);
       });
   });
 
